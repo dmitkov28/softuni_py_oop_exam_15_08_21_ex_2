@@ -32,7 +32,7 @@ class Bakery:
 
         if food_type in available_foods:
             if name in [x.name for x in self.food_menu]:
-                raise Exception(f'{food_type} {name} is already in the menu!')
+                    raise Exception(f'{food_type} {name} is already in the menu!')
 
             new_food = available_foods[food_type](name, price)
             self.food_menu.append(new_food)
@@ -50,7 +50,7 @@ class Bakery:
 
             new_drink = available_drinks[drink_type](name, portion, brand)
             self.drinks_menu.append(new_drink)
-            return f'Added {name} ({drink_type}) to the drink menu'
+            return f'Added {name} ({brand}) to the drink menu'
 
     def add_table(self, table_type: str, table_number: int, capacity: int):
         table_types = {
@@ -131,12 +131,12 @@ class Bakery:
     def get_total_income(self):
         return f'Total income: {self.total_income:.2f}lv'
 
-#
-# test_bakery = Bakery('Ma Bakery')
-# print(test_bakery.add_food('Bread', 'Ezekiel', 12))
-# # print(test_bakery.add_food('Bread', 'Ezekiel', 12))
-# print(test_bakery.food_menu)
-# print(test_bakery.add_drink('Water', 'Coke Zero', 220, 'Coca Cola'))
+
+test_bakery = Bakery('Ma Bakery')
+print(test_bakery.add_food('Bread', 'Ezekiel', 12))
+print(test_bakery.add_food('Cake', 'Tiramisu', 15))
+print(test_bakery.food_menu)
+print(test_bakery.add_drink('Water', 'Coke Zero', 220, 'Coca Cola'))
 # # print(test_bakery.add_drink('Water', 'Coke Zero', 220, 'Coca Cola'))
 # print(test_bakery.add_table('InsideTable', 12, 5))
 # print(test_bakery.add_table('InsideTable', 18, 5))

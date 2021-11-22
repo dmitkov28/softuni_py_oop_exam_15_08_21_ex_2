@@ -21,3 +21,4 @@ class InsideTable(Table):
             raise ValueError('Inside table\'s number must be between 1 and 50 inclusive!')
         self.__table_number = value
 
+

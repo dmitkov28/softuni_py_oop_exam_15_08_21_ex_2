@@ -25,7 +25,7 @@ class Drink(ABC):
         if value <= 0:
             raise ValueError('Portion cannot be less than or equal to zero!')
         self.__portion = value
-        
+
     @property
     def brand(self):
         return self.__brand
@@ -35,7 +35,6 @@ class Drink(ABC):
         if value == '' or value == ' ':
             raise ValueError('Brand cannot be empty string or white space!')
         self.__brand = value
-
 
     def __repr__(self):
         return f' - {self.name} {self.brand} - {self.portion:.2f}ml - {self.price:.2f}lv'
