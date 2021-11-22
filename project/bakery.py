@@ -74,10 +74,44 @@ class Bakery:
         return f'No available table for {number_of_people} people'
 
     def order_food(self, table_number: int, *args):
+        if table_number not in [x.table_number for x in self.tables_repository]:
+            return f'Could not find table {table_number}'
 
+        table = [x for x in self.tables_repository if x.table_number == table_number][0]
+        available_food = []
+        unavailable_food = []
+        for food in args:
+            if food in [x.name for x in self.food_menu]:
+                food_obj = [x for x in self.food_menu if x.name == food][0]
+                table.order_food(food_obj)
+                available_food.append(food_obj)
+            else:
+                unavailable_food.append(food)
+
+        return f'Table {table_number} ordered:\n' + \
+               '\n'.join(str(x) for x in available_food) + \
+               f'\n{self.name} does not have in the menu:\n' + \
+               '\n'.join(unavailable_food)
 
     def order_drink(self, table_number: int, *args):
+        if table_number not in [x.table_number for x in self.tables_repository]:
+            return f'Could not find table {table_number}'
 
+        table = [x for x in self.tables_repository if x.table_number == table_number][0]
+        available_drinks = []
+        unavailable_drinks = []
+        for drink in args:
+            if drink in [x.name for x in self.drinks_menu]:
+                drink_obj = [x for x in self.drinks_menu if x.name == drink][0]
+                table.order_drink(drink_obj)
+                available_drinks.append(drink_obj)
+            else:
+                unavailable_drinks.append(drink)
+
+        return f'Table {table_number} ordered:\n' + \
+               '\n'.join(str(x) for x in available_drinks) + \
+               f'\n{self.name} does not have in the menu:\n' + \
+               '\n'.join(unavailable_drinks)
 
     def leave_table(self, table_number):
         table = [x for x in self.tables_repository if x.table_number == table_number][0]
@@ -97,20 +131,20 @@ class Bakery:
     def get_total_income(self):
         return f'Total income: {self.total_income:.2f}lv'
 
-
-test_bakery = Bakery('Ma Bakery')
-print(test_bakery.add_food('Bread', 'Ezekiel', 12))
+#
+# test_bakery = Bakery('Ma Bakery')
 # print(test_bakery.add_food('Bread', 'Ezekiel', 12))
-print(test_bakery.food_menu)
-print(test_bakery.add_drink('Water', 'Coke Zero', 220, 'Coca Cola'))
+# # print(test_bakery.add_food('Bread', 'Ezekiel', 12))
+# print(test_bakery.food_menu)
 # print(test_bakery.add_drink('Water', 'Coke Zero', 220, 'Coca Cola'))
-print(test_bakery.add_table('InsideTable', 12, 5))
-print(test_bakery.add_table('InsideTable', 18, 5))
-print(test_bakery.add_table('InsideTable', 13, 5))
-# print(test_bakery.reserve_table(11))
-print(test_bakery.order_food(12, 'Ezekiel', 'Babikiel', 'Grrrer'))
-print(test_bakery.order_drink(12, 'Coke Zero', 'Coke Zero', 'Grrrer'))
-print(test_bakery.leave_table(12))
-print(test_bakery.get_free_tables_info())
-print(test_bakery.get_total_income())
-
+# # print(test_bakery.add_drink('Water', 'Coke Zero', 220, 'Coca Cola'))
+# print(test_bakery.add_table('InsideTable', 12, 5))
+# print(test_bakery.add_table('InsideTable', 18, 5))
+# print(test_bakery.add_table('InsideTable', 13, 5))
+# # print(test_bakery.reserve_table(11))
+# print(test_bakery.order_food(12, 'Ezekiel', 'Babikiel', 'Grrrer'))
+# print(test_bakery.order_drink(12, 'Coke Zero', 'Coke Zero', 'Grrrer'))
+# # print(test_bakery.leave_table(12))
+# print(test_bakery.get_free_tables_info())
+# print(test_bakery.get_total_income())
+# #
